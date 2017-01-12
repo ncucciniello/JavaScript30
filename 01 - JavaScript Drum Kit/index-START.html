@@ -58,7 +58,22 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+  console.log('script loaded');
 
+  function playDrum(e) {
+    console.log('drum hit');
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    if (!audio) return;
+    key.classList.add('playing');
+    audio.currentTime = 0;
+    audio.play();
+    setTimeout( () => {
+      key.classList.remove('playing');
+    }, 50);
+  }
+
+  window.addEventListener('keydown', playDrum);
 </script>
 
 
